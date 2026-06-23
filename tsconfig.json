@@ -36,6 +36,8 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
+    //"verbatimModuleSyntax": false,
+
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,

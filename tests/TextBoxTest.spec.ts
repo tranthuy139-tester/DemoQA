@@ -1,7 +1,7 @@
-import { test, expect, type Page } from "@playwright/test";
-import { TextBoxPage } from "../pages/TextBoxPage.js";
+import { test, expect } from '@playwright/test';
+import { TextBoxPage } from '../pages/TextBoxPage.js';
 
-test.describe('TextBox Tests', () => {   
+test.describe('TextBox Tests', () => {
     let textBoxPage: TextBoxPage;
 
     test.beforeEach(async ({ page }) => {
