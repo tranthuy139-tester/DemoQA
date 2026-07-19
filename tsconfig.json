@@ -42,6 +42,17 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+  },
+  "include": [
+    "common/**/*.ts",
+    "pages/**/*.ts",
+    "tests/**/*.ts",
+    "playwright.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test-results",
+    "playwright-report",
+    "reports"
+  ]
 }
