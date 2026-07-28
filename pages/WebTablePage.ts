@@ -12,6 +12,7 @@ export class WebTablesPage {
   readonly txtSalary: Locator;
   readonly txtDepartment: Locator;
   readonly btnSubmit: Locator;
+  readonly btnDeletes: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -20,18 +21,19 @@ export class WebTablesPage {
     this.txtFirstName = page.locator("#firstName");
     this.txtLastName = page.locator("#lastName");
     this.txtAge = page.locator("#age");
-    this.txtEmail = page.locator("#email");
+    this.txtEmail = page.locator("#userEmail");
     this.txtSalary = page.locator("#salary");
     this.txtDepartment = page.locator("#department");
     this.btnSubmit = page.locator("#submit");
+    this.btnDeletes = page.locator("xpath=//span[@title='Delete']/svg");
   }
 
   async search(keyword: string) {
     await this.txtSearch.fill(keyword);
     await this.txtSearch.press("Enter");
   }
-
-  async verifySearchResult(keyword: string, searchBy: string): Promise<string> {
+  //searchResult 
+  async verifySearchResult(searchBy: string, keyword: string): Promise<string> {
     let result = "";
     switch (searchBy) {
       case "FirstName":
@@ -60,8 +62,9 @@ export class WebTablesPage {
       "@param",
       columnIndex.toString(),
     );
+
     const text: string =
-      (await this.page.locator(searchResultLocator).textContent()) ?? "";
+      (await this.page.locator(searchResultLocator).first().textContent()) ?? "";
     return text;
   }
   async createNewUser(
@@ -71,7 +74,9 @@ export class WebTablesPage {
     email: string,
     salary: number,
     department: string,
-  ) {
+  ) 
+  
+  {
     await this.btnAdd.click();
     await this.txtFirstName.fill(firstName);
     await this.txtLastName.fill(lastName);
@@ -79,6 +84,17 @@ export class WebTablesPage {
     await this.txtEmail.fill(email);
     await this.txtSalary.fill(salary.toString());
     await this.txtDepartment.fill(department);
-    await this.page.locator("#submit").click();
+    await this.btnSubmit.click();
+  }
+
+  async deleteUser(keyword: string) {
+    // Implementation for deleting user based on search criteria
+    await this.search(keyword);
+    const count = await this.btnDeletes.count();
+    if (count > 0) {
+      for (let i = 0; i < count; i++) {
+      await this.btnDeletes.first().click();
+    }
+  }
   }
 }
