@@ -9,6 +9,7 @@ test.describe("Web Tables Test", () => {
       const webTablesPage = new WebTablesPage(page);
 
       await page.goto("/webtables");
+      await webTablesPage.deleteUser(data.Keyword ?? "");
       await webTablesPage.createNewUser(
         data.FirstName ?? "",
         data.LastName ?? "",
